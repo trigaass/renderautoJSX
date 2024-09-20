@@ -8,7 +8,7 @@ export const Login = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (email === "admim@admim" && password === "1234") {
+        if (email === "admin@admin" && password === "1234") {
             navigate("/home");
         }
     }
