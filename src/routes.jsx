@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AddRun } from "./screens/addrun"
 import { Home } from "./screens/home"
 import { ReaisProvider } from "./contexts/reais"
