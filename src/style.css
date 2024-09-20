@@ -1,0 +1,229 @@
+/* Login */
+@media(max-width: 1044px){
+    .logologin{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .logologin img{
+        width: 200px;
+        margin: 5px 0;
+
+    }
+
+    .formlogin{
+        display: grid;
+        justify-content: center;
+    }
+
+    .formlogin input{
+        margin-bottom: 10px;
+        width: 250px;
+        height: 20px;
+        border-radius: 5px;
+        border: 0.5px solid grey;
+    }
+
+    .formlogin button{
+        background-color: #6DB52F;
+        color: #fff;
+        border-radius: 10px;
+        border: 0.5px solid grey;
+        height: 30px;
+    }
+}
+
+/* Header */
+@media (max-width: 1044px) {
+    .header {
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding-top: 2.5px;
+        padding-bottom: 2.5px;
+    }
+
+    .logoimg {
+        width: 40px;
+        height: 45px;
+    }
+
+    .logoname {
+        width: 80px;
+        height: 45px;
+
+    }
+}
+
+/* home */
+@media (max-width: 1044px){
+    .painelbar{
+        display: flex;
+        align-items: center;
+        background-color: #6DB52F;
+        color: black;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .painelbar h1{
+        font-size: 25px;
+    }
+
+    .painelsado{
+        margin: 0 10px;
+    }
+
+    .barrabranca{
+        background-color: black;
+        width: 5px;
+        height: 75px;
+        border-radius: 10px;
+        margin: 0 15px;
+    }
+
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 10px 0 10px;
+    }
+
+    .boddy p{
+        font-weight: bold;
+        font-size: 30px;
+        margin: 15px;
+    }
+
+    .boxcard{
+        background-color: #fff;
+        text-align: center;
+        width: 45%;
+        height: 120px;
+        border-radius: 10px;
+        margin: 10px 8px 10px 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .boxcard img{
+        height: 35px;
+        width: 35px;
+        margin-top: 10px;
+        margin-bottom: -10px;
+    }
+
+    .boxcard h3{
+        font-size: 15px;
+        margin-top: -10px;
+    }
+
+    .resumo {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        height: 120px;
+        margin: 20px 16px;
+        width: 90%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .resumo img {
+        height: 40px;
+        margin: 0 10px;
+    }
+}
+
+/* toplinks */
+@media (max-width: 1044px) {
+    .links {
+        background-color: #F3EDF8;
+        display: flex;
+        justify-content: center;
+    }
+
+    .link {
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 25px;
+        margin: 0 5px 0 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .active {
+        border-bottom: 1px solid black;
+    }
+}
+
+ /* forms */
+@media (max-width: 1044px){
+    .addform p{
+        font-weight: bold;
+        font-size: 30px;
+        margin: 15px;
+    }
+
+    .addform{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .textbox{
+        display: grid;
+    }
+
+    .textbox input{
+        width: 320px;
+        margin-bottom: 20px;
+    }
+
+    .selectbox{
+        display: grid;
+    }
+    
+    .selectbox select{
+        width: 320px;
+        margin-bottom: 20px;
+    }
+
+    .bttn button{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border: none;
+        background-color: #6DB52F;
+        width: 150px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 16px;
+    }
+}
+
+/* navbar */
+@media (max-width: 1044px) {
+    .nbar {
+        position: fixed;
+        display: flex;
+        margin: 0 auto;
+        background-color: #868282;
+        left: 0;
+        right: 0;
+        bottom: 20px;
+        border-radius: 10px;
+        height: 45px;
+        width: 150px;
+    }
+
+    .nbar img {
+        width: 26px;
+        height: 26px;
+        padding: 9px 12px;
+    }
+
+}
