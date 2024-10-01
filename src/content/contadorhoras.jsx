@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 
-export const ContadorHoras = () => {
-
+export const ContadorHoras = ({ contando, setContando }) => {
     const [horas, setHoras] = useState(0);
     const [minutos, setMinutos] = useState(0);
-    const [contando, setContando] = useState(false);
 
     useEffect(() => {
         let intervalo = null;
@@ -12,32 +10,23 @@ export const ContadorHoras = () => {
             intervalo = setInterval(() => {
                 setMinutos(prevMinutos => {
                     if (prevMinutos === 59) {
-                        setHoras(prevHoras => prevHoras + 1);
+                        setHoras(prevHoras => {
+                            const novasHoras = prevHoras + 1;
+                            onUpdateHoras(novasHoras);
+                            return novasHoras;
+                        });
                         return 0;
                     } else {
                         return prevMinutos + 1;
                     }
                 });
             }, 60000);
-        } else if (!contando && minutos !== 0) {
+        } else {
             clearInterval(intervalo);
         }
+
         return () => clearInterval(intervalo);
-    }, [contando, minutos]);
-
-    const iniciarContagem = () => {
-        setContando(true);
-    };
-
-    const pararContagem = () => {
-        setContando(false);
-    };
-
-    const resetarContagem = () => {
-        setContando(false);
-        setHoras(0);
-        setMinutos(0);
-    };
+    }, [contando]);
 
     return (
         <div>
@@ -46,13 +35,19 @@ export const ContadorHoras = () => {
             </h1>
         </div>
     );
-}
+};
 
-export const ButtnHoras = ({onClick}) => {
+export const ButtnHoras = ({ contando, iniciar, parar, resetar }) => {
     return (
         <div>
-            <button onClick={onClick}>Iniciar</button>
-            <button onClick={onClick}>Parar</button>
+            {contando ? (
+                <>
+                    <button onClick={parar}>Parar</button>
+                    <button onClick={resetar}>Resetar</button>
+                </>
+            ) : (
+                <button onClick={iniciar}>Iniciar</button>
+            )}
         </div>
-    )
-}
+    );
+};

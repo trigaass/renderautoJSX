@@ -119,10 +119,10 @@
         margin-top: -10px;
     }
 
-    .resumo {
+    .resumes {
         background-color: #fff;
         display: flex;
-        align-items: center;
+        flex-wrap: wrap;
         border-radius: 10px;
         height: 120px;
         margin: 20px 16px;
@@ -130,10 +130,25 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    .resumo img {
-        height: 40px;
-        margin: 0 10px;
+    .resumes h1{
+        font-size: 30px;
+        margin: 5px 90px -20px 10px;
     }
+
+    .resumo h3{
+        font-size: 15px;
+    }
+
+    .resumo h2{
+        font-size: 15px;
+    }
+
+    .resumo{
+        display: flex;
+        align-items: center;
+        margin: -60px 10px -45px 10px;
+    }
+
 }
 
 /* toplinks */

@@ -12,7 +12,7 @@ export const PainelBar = (props) => {
 
             <div className="painelhoras">
                 <h1>Horas rodando:</h1>
-                <ContadorHoras />
+                <div>{props.horas}</div>
             </div>
         </div>
     )

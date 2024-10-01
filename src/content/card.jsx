@@ -8,10 +8,11 @@ export const Boxcard = (props) => {
     )
 }
 
-export const ResumeBox = () =>{
+export const ResumeBox = (props) =>{
     return(
         <div className="resumo">
-            <img src="resumo.png" />
+            <h3>{props.legenda}</h3>
+            <h2>{props.valor}</h2>
         </div>
     )
 }
