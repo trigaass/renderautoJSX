@@ -21,7 +21,7 @@ export const Login = () => {
             if (response.ok) {
                 return response.text();
             } else if (response.status === 401) {
-                throw new Error("E-mail ou senha incorretos.");
+                throw new Error("E-mail ou senha incorretos, ou e-mail não verificado.");
             } else {
                 throw new Error("Erro ao fazer login. Tente novamente mais tarde.");
             }
@@ -29,7 +29,7 @@ export const Login = () => {
         .then(data => {
             setErrorMessage("");
             alert(data);
-            navigate("/home");
+            navigate("/home"); // Redireciona para a página home
         })
         .catch(error => {
             setErrorMessage(error.message);

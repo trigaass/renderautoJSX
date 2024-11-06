@@ -30,14 +30,14 @@ export const Cadastro = () => {
                     body: JSON.stringify({ email, password })
                 });
             } else {
-                throw new Error("ja existe alguem com essa senha");
+                throw new Error("Erro ao verificar e-mail.");
             }
         })
         .then(response => response.text())
         .then(data => {
             setErrorMessage("");
-            alert("Usuário cadastrado com sucesso!");
-            navigate("/");
+            alert("Usuário cadastrado com sucesso! Verifique seu e-mail para ativação.");
+            navigate("/"); // Redireciona para a página inicial ou de login
         })
         .catch(error => {
             setErrorMessage(error.message);
@@ -72,5 +72,5 @@ export const Cadastro = () => {
                 <button type="submit">Cadastrar</button>
             </form>
         </>
-    )
+    );
 };
