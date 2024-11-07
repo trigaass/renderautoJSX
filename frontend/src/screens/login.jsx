@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -17,24 +17,24 @@ export const Login = () => {
             },
             body: JSON.stringify({ email, password })
         })
-        .then(response => {
-            if (response.ok) {
-                return response.text();
-            } else if (response.status === 401) {
-                throw new Error("E-mail ou senha incorretos, ou e-mail não verificado.");
-            } else {
-                throw new Error("Erro ao fazer login. Tente novamente mais tarde.");
-            }
-        })
-        .then(data => {
-            setErrorMessage("");
-            alert(data);
-            navigate("/home"); // Redireciona para a página home
-        })
-        .catch(error => {
-            setErrorMessage(error.message);
-            console.error("Erro ao fazer login:", error);
-        });
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else if (response.status === 401) {
+                    throw new Error("E-mail ou senha incorretos, ou e-mail não verificado.");
+                } else {
+                    throw new Error("Erro ao fazer login. Tente novamente mais tarde.");
+                }
+            })
+            .then(data => {
+                setErrorMessage("");
+                alert(data);
+                navigate("/home"); // Redireciona para a página home
+            })
+            .catch(error => {
+                setErrorMessage(error.message);
+                console.error("Erro ao fazer login:", error);
+            });
     }
 
     return (
@@ -67,6 +67,9 @@ export const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit">Login</button>
+
+                <Link to="/register" className="registerlink"> Não tem conta? cadastre-se </Link>
+                
             </form>
         </>
     );

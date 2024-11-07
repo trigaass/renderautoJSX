@@ -17,32 +17,31 @@ export const Cadastro = () => {
             },
             body: JSON.stringify({ email })
         })
-        .then(response => {
-            if (response.status === 409) {
-                throw new Error("Este email já está cadastrado.");
-            }
-            if (response.ok) {
-                return fetch("http://localhost:3001/users", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-            } else {
-                throw new Error("Erro ao verificar e-mail.");
-            }
-        })
-        .then(response => response.text())
-        .then(data => {
-            setErrorMessage("");
-            alert("Usuário cadastrado com sucesso! Verifique seu e-mail para ativação.");
-            navigate("/"); // Redireciona para a página inicial ou de login
-        })
-        .catch(error => {
-            setErrorMessage(error.message);
-            console.error("Erro ao cadastrar:", error);
-        });
+            .then(response => {
+                if (response.status === 409) {
+                    throw new Error("Este email já está cadastrado.");
+                }
+                if (response.ok) {
+                    return fetch("http://localhost:3001/users", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ email, password })
+                    });
+                } else {
+                    throw new Error("Erro ao verificar e-mail.");
+                }
+            })
+            .then(response => response.text())
+            .then(data => {
+                setErrorMessage("");
+                throw new Error("Usuário cadastrado com sucesso! Verifique seu e-mail para ativação.");
+            })
+            .catch(error => {
+                setErrorMessage(error.message);
+                console.error("Erro ao cadastrar:", error);
+            });
     }
 
     return (
@@ -69,6 +68,9 @@ export const Cadastro = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <label>
+                    <input type="checkbox" /> li e concordo com termos de serviços
+                </label>
                 <button type="submit">Cadastrar</button>
             </form>
         </>

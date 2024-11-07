@@ -33,6 +33,13 @@
         border-radius: 10px;
         border: 0.5px solid grey;
         height: 30px;
+        margin-bottom: 20px;
+    }
+
+    .registerlink {
+        text-decoration: none;
+        color: #868282;
+        text-align: center;
     }
 }
 

@@ -26,57 +26,54 @@ db.connect((err) => {
   }
 });
 
+const generateVerificationToken = () => {
+  return crypto.randomBytes(20).toString("hex");
+};
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "renderautotestes@gmail.com",
-    pass: "Tortademor@ng0", 
-  },
-});
+const generateVerificationLink = (token) => {
+  return `http://localhost:3001/verify-email?token=${token}`;
+};
 
+const sendVerificationEmail = async (email, verificationLink) => {
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    auth: {
+      user: "renderautotestes@gmail.com",
+      pass: "zfyi gkrb cllz wzgg"
+    }
+  });
 
-function sendVerificationEmail(email, token) {
-  const verificationLink = `http://localhost:3001/verify-email?token=${token}`; // Link de verificação
-
-  const mailOptions = {
-    from: "seuemail@gmail.com",
+  await transporter.sendMail({
+    from: '"renderauto" <renderautotestes@gmail.com>',
     to: email,
     subject: "Confirme seu e-mail",
     text: `Clique no link para verificar seu e-mail: ${verificationLink}`,
     html: `<p>Clique no link para verificar seu e-mail: <a href="${verificationLink}">Verificar E-mail</a></p>`,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Erro ao enviar e-mail:", error);
-    } else {
-      console.log("E-mail de verificação enviado:", info.response);
-    }
   });
-}
-
-
-function generateVerificationToken() {
-  return crypto.randomBytes(20).toString("hex");
-}
-
+};
 
 app.post("/users", (req, res) => {
   const { email, password } = req.body;
   const verificationToken = generateVerificationToken();
+  const verificationLink = generateVerificationLink(verificationToken);
 
   const query = "INSERT INTO users (email, senha, verification_token, isVerified) VALUES (?, ?, ?, 0)";
   db.query(query, [email, password, verificationToken], (err, result) => {
     if (err) {
       res.status(500).send("Erro ao salvar no banco de dados.");
     } else {
-      sendVerificationEmail(email, verificationToken); // Envia o e-mail de verificação
-      res.status(200).send("Usuário cadastrado com sucesso! Verifique seu e-mail para ativação.");
+      sendVerificationEmail(email, verificationLink)
+        .then(() => {
+          res.status(200).send("Usuário cadastrado com sucesso! Verifique seu e-mail para ativação.");
+        })
+        .catch((error) => {
+          console.error("Erro ao enviar o e-mail:", error);
+          res.status(500).send("Erro ao enviar o e-mail de verificação.");
+        });
     }
   });
 });
-
 
 app.get("/verify-email", (req, res) => {
   const { token } = req.query;
@@ -99,7 +96,6 @@ app.post("/check-email", (req, res) => {
     if (err) {
       res.status(500).send("Erro ao acessar o banco de dados.");
     } else if (result.length > 0) {
-      // Se o email já existe
       res.status(409).send("Este email já está cadastrado.");
     } else {
       res.status(200).send("Email disponível.");
