@@ -1,5 +1,5 @@
 /* Login */
-@media(max-width: 1044px){
+@media(max-width: 510px){
     .logologin{
         display: flex;
         flex-direction: column;
@@ -43,8 +43,31 @@
     }
 }
 
+/* register */
+@media(max-width: 510px){
+    .cadastro{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .cadastro .reg{
+        display: grid;
+        width: 100%;
+        margin: 0vw 0vw 2vw;
+    }
+
+    .cadastro p{
+        display: flex;
+        height: 3vw;
+    }
+
+}
+
 /* Header */
-@media (max-width: 1044px) {
+@media (max-width: 510px) {
     .header {
         background-color: black;
         display: flex;
@@ -67,35 +90,36 @@
 }
 
 /* home */
-@media (max-width: 1044px){
+@media (max-width: 510px){
     .painelbar{
         display: flex;
         align-items: center;
+        justify-content: space-evenly;
         background-color: #6DB52F;
         color: black;
         border-radius: 0 0 10px 10px;
     }
 
     .painelbar h1{
-        font-size: 25px;
+        font-size: 5.5vw;
     }
 
     .painelsado{
-        margin: 0 10px;
+        margin: 0 1vw;
     }
 
     .barrabranca{
         background-color: black;
-        width: 5px;
-        height: 75px;
+        width: 1vw;
+        height: 9vh;
         border-radius: 10px;
-        margin: 0 15px;
     }
 
     .cards{
         display: flex;
         flex-wrap: wrap;
-        margin: 0 10px 0 10px;
+        width: 100%;
+        margin: 0 1vw 0 1vw;
     }
 
     .boddy p{
@@ -107,10 +131,10 @@
     .boxcard{
         background-color: #fff;
         text-align: center;
-        width: 45%;
-        height: 120px;
+        width: 40%;
+        height: 140px;
         border-radius: 10px;
-        margin: 10px 8px 10px 8px;
+        margin: 10px 4vw;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
@@ -131,35 +155,38 @@
         display: flex;
         flex-wrap: wrap;
         border-radius: 10px;
-        height: 120px;
-        margin: 20px 16px;
-        width: 90%;
+        height: 150px;
+        margin: 0 5vw;
+        width: 88%;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .resumes h1{
-        font-size: 30px;
-        margin: 5px 90px -20px 10px;
+        font-size: 6.8vw;
+        width: 100%;
+        margin: 3vw 90px -20px 10px;
     }
 
     .resumo h3{
-        font-size: 15px;
+        font-size: 4vw;
     }
 
     .resumo h2{
-        font-size: 15px;
+        font-size: 4vw;
     }
 
     .resumo{
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        margin: -60px 10px -45px 10px;
+        width: 48%;
+        margin: -60px -15px -45px 10px;
     }
 
 }
 
 /* toplinks */
-@media (max-width: 1044px) {
+@media (max-width: 510px) {
     .links {
         background-color: #F3EDF8;
         display: flex;
@@ -182,7 +209,7 @@
 }
 
  /* forms */
-@media (max-width: 1044px){
+@media (max-width: 510px){
     .addform p{
         font-weight: bold;
         font-size: 30px;
@@ -200,7 +227,7 @@
     }
 
     .textbox input{
-        width: 320px;
+        width: 80vw;
         margin-bottom: 20px;
     }
 
@@ -209,7 +236,7 @@
     }
     
     .selectbox select{
-        width: 320px;
+        width: 85vw;
         margin-bottom: 20px;
     }
 
@@ -228,7 +255,7 @@
 }
 
 /* navbar */
-@media (max-width: 1044px) {
+@media (max-width: 510px) {
     .nbar {
         position: fixed;
         display: flex;

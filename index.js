@@ -30,12 +30,11 @@ const generateVerificationToken = () => {
   return crypto.randomBytes(20).toString("hex");
 };
 
-const frontendURL = "http://localhost:5173"; // URL do frontend
+const frontendURL = "http://localhost:5173";
 const generateVerificationLink = (token) => {
-  return `${frontendURL}/verify?token=${token}`; // Gera o link de verificação para o frontend
+  return `${frontendURL}/verify?token=${token}`;
 };
 
-// Função de envio de e-mail
 const sendVerificationEmail = async (email, verificationLink) => {
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -55,6 +54,38 @@ const sendVerificationEmail = async (email, verificationLink) => {
   });
 };
 
+app.post("/resend-verification", (req, res) => {
+  const { email } = req.body;
+
+  const query = "SELECT * FROM users WHERE email = ? AND isVerified = 0";
+  db.query(query, [email], (err, result) => {
+    if (err) {
+      res.status(500).send("Erro no servidor.");
+    } else if (result.length === 0) {
+      res.status(404).send("Usuário não encontrado ou já verificado.");
+    } else {
+      const verificationToken = generateVerificationToken();
+      const verificationLink = generateVerificationLink(verificationToken);
+
+      const updateQuery = "UPDATE users SET verification_token = ? WHERE email = ?";
+      db.query(updateQuery, [verificationToken, email], (updateErr) => {
+        if (updateErr) {
+          res.status(500).send("Erro ao atualizar o token.");
+        } else {
+          sendVerificationEmail(email, verificationLink)
+            .then(() => {
+              res.status(200).send("E-mail de verificação reenviado.");
+            })
+            .catch((error) => {
+              console.error("Erro ao enviar o e-mail:", error);
+              res.status(500).send("Erro ao enviar o e-mail de verificação.");
+            });
+        }
+      });
+    }
+  });
+});
+
 app.post("/users", (req, res) => {
   const { email, password } = req.body;
   const verificationToken = generateVerificationToken();
@@ -65,7 +96,7 @@ app.post("/users", (req, res) => {
     if (err) {
       res.status(500).send("Erro ao salvar no banco de dados.");
     } else {
-      sendVerificationEmail(email, verificationLink) // Envia o link para o frontend
+      sendVerificationEmail(email, verificationLink)
         .then(() => {
           res.status(200).send("Usuário cadastrado com sucesso! Verifique seu e-mail para ativação.");
         })
@@ -110,14 +141,22 @@ app.post("/check-email", (req, res) => {
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  const query = "SELECT * FROM users WHERE email = ? AND senha = ? AND isVerified = 1";
+  const query = "SELECT * FROM users WHERE email = ? AND senha = ?";
   db.query(query, [email, password], (err, results) => {
     if (err) {
       res.status(500).send("Erro no servidor.");
     } else if (results.length > 0) {
-      res.status(200).send("Login bem-sucedido!");
+      const user = results[0];
+      if (user.isVerified) {
+        // Login bem-sucedido se a conta estiver verificada
+        res.status(200).send("Login bem-sucedido!");
+      } else {
+        // Conta não verificada
+        res.status(403).json({ error: "Conta não verificada." });
+      }
     } else {
-      res.status(401).send("E-mail ou senha incorretos, ou e-mail não verificado.");
+      // E-mail ou senha incorretos
+      res.status(401).send("E-mail ou senha incorretos.");
     }
   });
 });

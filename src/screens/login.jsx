@@ -19,17 +19,19 @@ export const Login = () => {
         })
             .then(response => {
                 if (response.ok) {
-                    return response.text();
+                    return response.text(); // Retorna a mensagem do servidor se o login for bem-sucedido
                 } else if (response.status === 401) {
-                    throw new Error("E-mail ou senha incorretos, ou e-mail não verificado.");
+                    throw new Error("E-mail ou senha incorretos.");
+                } else if (response.status === 403) {
+                    // Redireciona para a página de reenvio de verificação se o usuário não estiver verificado
+                    navigate("/resend", { state: { email } });
+                    throw new Error("Conta não verificada. Verifique seu e-mail.");
                 } else {
                     throw new Error("Erro ao fazer login. Tente novamente mais tarde.");
                 }
             })
             .then(data => {
-                setErrorMessage("");
-                alert(data);
-                navigate("/home"); // Redireciona para a página home
+                navigate("/home");
             })
             .catch(error => {
                 setErrorMessage(error.message);

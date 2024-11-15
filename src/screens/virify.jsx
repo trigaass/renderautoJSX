@@ -12,7 +12,7 @@ export const Verify = () => {
 
     if (token) {
       fetch(`http://localhost:3001/verify-email?token=${token}`)
-        .then((response) => response.json()) // O servidor agora deve redirecionar, então não é necessário usar essa parte
+        .then((response) => response.json())
         .catch((error) => {
           setMessage("Erro ao verificar o e-mail.");
           console.error(error);
@@ -24,8 +24,7 @@ export const Verify = () => {
 
   return (
     <div>
-      <h1>Verificação de E-mail</h1>
-      <p>{message}</p>
+      <h1>Conta verificada, clique no link abaixo para finalzar cadastro</h1>
     </div>
   );
 };

@@ -36,16 +36,16 @@ export const Cadastro = () => {
             .then(response => response.text())
             .then(data => {
                 setErrorMessage("");
-                throw new Error("Usuário cadastrado com sucesso! Verifique seu e-mail para ativação.");
             })
             .catch(error => {
                 setErrorMessage(error.message);
                 console.error("Erro ao cadastrar:", error);
             });
+        navigate("/resend")
     }
 
     return (
-        <>
+        <div className="cadastro">
             <form onSubmit={handleSubmit}>
                 {errorMessage && (
                     <div style={{ color: "red", marginBottom: "10px" }}>
@@ -54,6 +54,8 @@ export const Cadastro = () => {
                 )}
                 <label htmlFor="email">E-mail</label>
                 <input
+                    className="reg"
+                    required
                     id="email"
                     type="email"
                     placeholder="email@email.com"
@@ -62,17 +64,19 @@ export const Cadastro = () => {
                 />
                 <label htmlFor="password">Senha</label>
                 <input
+                    className="reg"
+                    required
                     id="password"
                     type="password"
                     placeholder="********"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <label>
-                    <input type="checkbox" /> li e concordo com termos de serviços
-                </label>
+                <p>
+                    <input required type="checkbox" /> li e concordo com termos de serviços
+                </p>
                 <button type="submit">Cadastrar</button>
             </form>
-        </>
+        </div>
     );
 };

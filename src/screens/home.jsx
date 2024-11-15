@@ -97,11 +97,11 @@ export const Home = () => {
                 <div className="resumes">
                     <h1>Parametro Geral:</h1>
                     <ResumeBox
-                        legenda="Lucro:"
+                        legenda="Lucro geral:"
                         valor={lucrobruto.toFixed(2)}
                     />
                     <ResumeBox
-                        legenda="Lucro por distancia:"
+                        legenda="Lucro por Km:"
                         valor={lucropquilometro.toFixed(2)}
                     />
                     <ResumeBox
